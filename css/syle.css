@@ -1,0 +1,83 @@
+:root {
+    --defaultColors: #F6D394;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(238, 238, 238);
+}
+
+.calendar {
+    max-width: 720px;
+    margin: 3% auto;
+    background-color: rgb(221, 221, 221);
+    border-radius: 12px;
+    font-family: "Lato", sans-serif;
+    font-weight: bold;
+    overflow: hidden;
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 2em;
+    color: white;
+    padding: 32px 20px;
+    background-color: var(--defaultColors);
+}
+
+.changeButton {
+    border-radius: 50%;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 28px;
+    background-color: var(--defaultColors);
+}
+
+.changeButton:hover {
+    filter: brightness(95%);
+}
+
+#weekDays {
+    display: flex;
+    color: var(--defaultColors);
+    background-color: white;
+    font-size: 1.3em;
+}
+
+.weekDay {
+    width: 100%;
+    text-align: center;
+    padding: 32px 0px 32px;
+}
+
+#days {
+    display: inline-flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.day, .noneDay, .todayDay {
+    cursor: pointer;
+    background-color: white;
+    color: rgb(145, 145, 145);
+    width: calc(100% / 7);
+    text-align: center;
+    padding: 36px 0px 36px;
+}
+
+.day:hover {
+    filter: brightness(93%);
+}
+
+.todayDay {
+    background-color: var(--defaultColors);
+    color: white;
+}
+
+.noneDay {
+    visibility: hidden;
+}
