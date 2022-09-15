@@ -1,6 +1,8 @@
 function myScope() {
     createWeekDays();
-    let date = new Date();
+    const date = new Date();
+    const month = date.getMonth();
+    const year = date.getFullYear();
     createCalendar(date);
     
     next.onclick = () => {
@@ -8,27 +10,46 @@ function myScope() {
         month += 1;
         date.setMonth(month);
         createCalendar(date);
-        eventDays(date);
+        eventDays(month, year);
     };
-
+    
     previous.onclick = () => {
         let month = date.getMonth();
         month -= 1;
         date.setMonth(month);
         createCalendar(date);
-        eventDays(date);
+        eventDays(month, year);
     };
-
-    eventDays(date);
+    
+    eventDays(month, year);
 }
 
-function eventDays(date) {
+function eventDays(month, year) {
     for (let i=0; i <= dayDivList.length; i++) {
         dayDivList[i].addEventListener("click", function () {
-            date.setDate(i);
-            console.log(date);
+            let localDate = new Date(year, month, 1);
+            localDate.setDate(i + 1);
+            createTaskBox(localDate);
         });
     }
+}
+
+function createTaskBox(localDate) {
+    document.querySelector(".calendar").style.opacity = 0.4;
+    let divDad = document.createElement("div");
+    divDad.id = "taskBox";
+    document.querySelector("body").appendChild(divDad);
+
+    dayStringLocal = localDate.toLocaleString('pt-br', {weekday:'long'});
+    dayNumLocal = localDate.getDate();
+    monthStringLocal = localDate.toLocaleString('pt-br', {month:'long'});
+    yearNumLocal = localDate.getFullYear();
+
+    let divHeader = document.createElement("div");
+    divHeader.id = "taskBoxHeader";
+    divHeader.innerHTML = `${dayStringLocal.charAt(0).toUpperCase() + dayStringLocal.slice(1)}, 
+    ${dayNumLocal} de ${monthStringLocal} de ${yearNumLocal}`;
+    divDad.appendChild(divHeader);
 }
 
 function createCalendar(date) {
