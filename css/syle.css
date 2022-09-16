@@ -10,7 +10,7 @@ body {
     font-weight: bold;
 }
 
-.calendar {
+#calendar {
     max-width: 720px;
     margin: 3% auto;
     background-color: rgb(221, 221, 221);
@@ -33,8 +33,9 @@ body {
     width: 30px;
     height: 30px;
     text-align: center;
-    line-height: 28px;
     background-color: var(--defaultColors);
+    line-height: 28px;
+    margin-top: 5px;
 }
 
 .changeButton:hover {
@@ -82,41 +83,91 @@ body {
     visibility: hidden;
 }
 
-#taskBox {
+#eventMenu {
+    visibility: hidden;
     background-color: white;
-    width: 450px;
-    height: 40%;
-    position: fixed;
-    top: 50%;
-    right: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-75%);
-    border-radius: 15px;
+    width: 500px;
+    height: 400px;
     overflow: hidden;
+    border-radius: 10px;
+    position: fixed;
+    right: 50%;
+    transform: translateX(50%);
+    top: 19%;
 }
 
-#taskBoxHeader {
+#eventHeader {
     background-color: var(--defaultColors);
-    height: 14%;
-    width: 100%;
+    justify-content: space-between;
+    display: flex;
     color: white;
-    font-size: 1.2rem;
-    padding-left: 12px;
-    line-height: 275%;
+}
+
+#eventDate {
+    font-size: 1.3em;
+    padding: 12px 12px;
+}
+
+#eventClose {
+    font-size: 1.4em;
+    height: 28px;
+    width: 28px;
+    text-align: center;
+    line-height: 28px;
+    margin: 12px 12px;
+}
+
+#eventClose:hover {
+    background-color: white;
+    color: var(--defaultColors);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#blackWall {
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    opacity: 0.3;
+    position: fixed;
+    top: 0;
+    cursor: pointer;
+    visibility: hidden;
 }
 
 @media (max-width: 500px) {
-    .calendar {
-        max-width: 400px;
+    #calendar {
+        max-width: 360px;
         margin: 10% auto;
         border-radius: 12px;
     }
 
+    #header {
+        font-size: 1.8em;
+    }
+
+    .changeButton {
+        margin-top: 2px;
+    }
+
+    .changeButton:hover {
+        filter: brightness(100%);
+    }
+
     .weekDay {
         padding: 28px 0px;
+        font-size: 0.8em;
     }
 
     .day, .noneDay, .todayDay {
-        padding: 32px 0px;
+        padding: 24px 0px;
+    }
+
+    .day:hover {
+        filter: brightness(100%);
+    }
+
+    #eventMenu {
+        width: 300px;
     }
 }
