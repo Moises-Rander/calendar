@@ -25,31 +25,43 @@ function myScope() {
 }
 
 function eventDays(month, year) {
-    for (let i=0; i <= dayDivList.length; i++) {
+    for (let i=0; i < dayDivList.length; i++) {
         dayDivList[i].addEventListener("click", function () {
             let localDate = new Date(year, month, 1);
             localDate.setDate(i + 1);
-            createTaskBox(localDate);
+            showEventMenu(localDate);
         });
     }
 }
 
-function createTaskBox(localDate) {
-    document.querySelector(".calendar").style.opacity = 0.4;
-    let divDad = document.createElement("div");
-    divDad.id = "taskBox";
-    document.querySelector("body").appendChild(divDad);
+function showEventMenu(localDate) {
+    eventMenu.style.visibility = 'visible';
+    createBlackWall();
+    createEventHeader(localDate);
+}
 
-    dayStringLocal = localDate.toLocaleString('pt-br', {weekday:'long'});
-    dayNumLocal = localDate.getDate();
-    monthStringLocal = localDate.toLocaleString('pt-br', {month:'long'});
-    yearNumLocal = localDate.getFullYear();
+function createBlackWall() {
+    blackWall.style.visibility = 'visible';
+}
 
-    let divHeader = document.createElement("div");
-    divHeader.id = "taskBoxHeader";
-    divHeader.innerHTML = `${dayStringLocal.charAt(0).toUpperCase() + dayStringLocal.slice(1)}, 
-    ${dayNumLocal} de ${monthStringLocal} de ${yearNumLocal}`;
-    divDad.appendChild(divHeader);
+function createEventHeader(localDate) {
+    const localWeekDay = localDate.toLocaleString('pt-br', {'weekday':'long'});
+    const localDay = localDate.getDate();
+    const localMonth = localDate.toLocaleString('pt-br', {'month':'long'});
+    const localYear = localDate.getFullYear();
+    eventDate.innerHTML = `${capitalize(localWeekDay)}, ${localDay} de ${localMonth} 
+    de ${localYear}`;
+    eventClose.addEventListener("click", function () {
+        closeEventMenu();
+    });
+    blackWall.addEventListener("click", function () {
+        closeEventMenu();
+    });
+}
+
+function closeEventMenu() {
+    eventMenu.style.visibility = 'hidden';
+    blackWall.style.visibility = 'hidden';
 }
 
 function createCalendar(date) {
@@ -118,5 +130,10 @@ function createWeekDays() {
         div.innerHTML = weekList[i];
         weekDays.appendChild(div);
     }
+}
+
+function capitalize(string) {
+    capitalizedString = string.charAt(0).toUpperCase() + string.slice(1);
+    return capitalizedString;
 }
 myScope();
